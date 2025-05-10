@@ -44,7 +44,7 @@ export const signUpAction = async (email: string, password: string) => {
 
     return { errorMessage: null };
   } catch (error) {
-    handleError(error);
+   return handleError(error);
   }
 };
 
