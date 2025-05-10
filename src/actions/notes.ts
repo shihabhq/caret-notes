@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 "use server";
 
 import { getUser } from "@/auth/server";

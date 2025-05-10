@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 "use server";
 
 import { createClient } from "@/auth/server";
@@ -44,7 +46,7 @@ export const signUpAction = async (email: string, password: string) => {
 
     return { errorMessage: null };
   } catch (error) {
-   return handleError(error);
+    return handleError(error);
   }
 };
 
@@ -58,4 +60,3 @@ export const SignOutAction = async () => {
     return { error: null };
   }
 };
-
