@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 "use server";
 
 import { createClient } from "@/auth/server";
