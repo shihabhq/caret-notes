@@ -120,6 +120,7 @@ export const AskAIAboutNotesAction = async (
       completion.choices[0].message.content || "Sorry a Problem has occured"
     );
   } catch (error) {
+    console.error(error);
     return "Sorry a Problem has occured";
   }
 };

@@ -54,6 +54,8 @@ export const SignOutAction = async () => {
     const { error } = await auth.signOut();
     return { error };
   } catch (e) {
+    console.error(e);
     return { error: null };
   }
 };
+

@@ -21,40 +21,35 @@ const AuthForm = ({ type }: { type: "login" | "signup" }) => {
   const router = useRouter();
   const initialAuthState: AuthDetails = {};
 
-  const handleSubmit = async (_: AuthDetails, formdata: FormData) => {
-    const email = formdata.get("email") as string;
-    const password = formdata.get("password") as string;
-
-    let errorMsg = "";
-    let title = "";
+  const handleSubmit = async (
+    prevState: AuthDetails,
+    formData: FormData,
+  ): Promise<AuthDetails> => {
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
 
     if (!email || !password) {
-      errorMsg = "All fields are required";
+      return { errorMsg: "All fields are required" };
     }
 
     if (isLoginForm) {
-      const result = await loginAction(email, password); // your server action
+      const result = await loginAction(email, password);
       if (result?.errorMessage) {
-        errorMsg = result.errorMessage;
+        return { errorMsg: result.errorMessage };
       } else {
-        title = "Logged In successfully";
+        toast.success("Logged In successfully");
+        router.replace("/");
+        return {};
       }
     } else {
       const result = await signUpAction(email, password);
       if (result?.errorMessage) {
-        errorMsg = result.errorMessage;
+        return { errorMsg: result.errorMessage };
       } else {
-        title = "Signed Up successfully -> check your email";
+        toast.success("Signed Up successfully -> check your email");
+        router.replace("/");
+        return {};
       }
-    }
-
-    if (errorMsg) {
-      toast.error(errorMsg);
-    
-      return { errorMsg };
-    } else {
-      toast.success(title);
-      router.replace("/");
     }
   };
 
